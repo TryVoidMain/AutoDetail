@@ -2,7 +2,7 @@
 
 namespace AutoDetail.DAL.Models
 {
-    public class UserDb : IDatabaseInterface
+    public class UserDb : IDatabaseEntity
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }

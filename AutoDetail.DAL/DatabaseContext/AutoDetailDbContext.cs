@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoDetail.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoDetail.DAL.DatabaseContext
 {
     public class AutoDetailDbContext : DbContext
     {
+        public DbSet<UserDb> Users { get; set; }
+
         public AutoDetailDbContext()
         {
             Database.EnsureCreated();
