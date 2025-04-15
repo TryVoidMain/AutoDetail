@@ -1,3 +1,6 @@
+using AutoDetail.DAL.DatabaseContext;
+using Microsoft.EntityFrameworkCore;
+
 namespace AutoDetail.Host
 {
     public class Program
@@ -7,6 +10,17 @@ namespace AutoDetail.Host
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            var services = builder.Services;
+            var configuration = builder.Configuration;
+
+            configuration
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            services.AddDbContext<AutoDetailDbContext>(options =>
+            {
+                options.UseNpgsql(configuration.GetConnectionString("AutoDetailDb"));
+            });
 
             builder.Services.AddControllers();
 
