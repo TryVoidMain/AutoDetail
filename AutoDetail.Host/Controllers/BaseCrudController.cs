@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoDetail.DAL.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AutoDetail.Host.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BaseCrudController<T> : ControllerBase where T : class
+    public class BaseCrudController<TDto, TEntity> : ControllerBase
+        where TDto : class
+        where TEntity : class, IDatabaseEntity
     {
         [HttpGet()]
         public IActionResult GetAll()
@@ -19,13 +22,13 @@ namespace AutoDetail.Host.Controllers
         }
 
         [HttpPost()]
-        public IActionResult Post([FromBody] T entity)
+        public IActionResult Post([FromBody] TDto entity)
         {
             return Ok();
         }
 
         [HttpPut()]
-        public IActionResult Put([FromBody] T entity)
+        public IActionResult Put([FromBody] TDto entity)
         {
             return Ok();
         }
@@ -37,7 +40,7 @@ namespace AutoDetail.Host.Controllers
         }
 
         [HttpDelete()]
-        public IActionResult DeleteRange([FromBody] List<Guid> ids)
+        public IActionResult DeleteRange([FromQuery] List<Guid> ids)
         {
             return Ok();
         }

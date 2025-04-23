@@ -1,5 +1,6 @@
 using AutoDetail.DAL.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace AutoDetail.Host
 {
@@ -8,6 +9,12 @@ namespace AutoDetail.Host
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(builder.Configuration)
+                .WriteTo.Console()
+                .CreateLogger();
+
+            builder.Host.UseSerilog();
 
             // Add services to the container.
             var services = builder.Services;

@@ -12,6 +12,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDetail.Host", "AutoDetail.Host\AutoDetail.Host.csproj", "{773C4EBD-0D24-4FD0-A7BF-3D449CB53790}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1EC43070-0833-4321-8EB8-20011DCA713C} = {1EC43070-0833-4321-8EB8-20011DCA713C}
+		{C74141BB-E52B-42CC-8AE4-BD4C51D2EFB1} = {C74141BB-E52B-42CC-8AE4-BD4C51D2EFB1}
 	EndProjectSection
 EndProject
 Global

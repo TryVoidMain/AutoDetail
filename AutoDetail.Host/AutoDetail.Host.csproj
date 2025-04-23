@@ -10,10 +10,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="9.0.4" />
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutoDetail.Core\AutoDetail.Core.csproj" />
     <ProjectReference Include="..\AutoDetail.DAL\AutoDetail.DAL.csproj" />
+    <ProjectReference Include="..\AutoDetail.Dtos\AutoDetail.Dtos.csproj" />
   </ItemGroup>
 
 </Project>

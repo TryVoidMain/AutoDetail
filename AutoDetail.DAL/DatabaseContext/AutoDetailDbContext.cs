@@ -7,7 +7,7 @@ namespace AutoDetail.DAL.DatabaseContext
     {
         public DbSet<UserDb> Users { get; set; }
 
-        public AutoDetailDbContext()
+        public AutoDetailDbContext(DbContextOptions<AutoDetailDbContext> opts) : base(opts)
         {
             Database.EnsureCreated();
         }

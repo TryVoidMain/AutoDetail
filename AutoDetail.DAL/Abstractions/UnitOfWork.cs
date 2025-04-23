@@ -1,5 +1,7 @@
 ﻿using AutoDetail.DAL.DatabaseContext;
+using AutoDetail.DAL.Helpers.Messages;
 using AutoDetail.DAL.Interfaces;
+using AutoDetail.DAL.Repository;
 using Microsoft.Extensions.Logging;
 
 namespace AutoDetail.DAL.Abstractions
@@ -28,7 +30,7 @@ namespace AutoDetail.DAL.Abstractions
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, UnitOfWorkMessageHelper.SAVE_ASYNC_ERROR_MESSAGE);
             }
         }
 
@@ -40,19 +42,7 @@ namespace AutoDetail.DAL.Abstractions
             }
             catch (Exception ex)
             {
-
-            }
-        }
-
-        public void Delete<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity
-        {
-            try
-            {
-                _dbContext.Remove(entity);
-            }
-            catch (Exception ex)
-            {
-
+                _logger.LogError(ex, UnitOfWorkMessageHelper.ADD_ASYNC_ERROR_MESSAGE);
             }
         }
 
@@ -64,19 +54,7 @@ namespace AutoDetail.DAL.Abstractions
             }
             catch (Exception ex)
             {
-
-            }
-        }
-
-        public void UpdateRange<TEntity>(IEnumerable<TEntity> entity) where TEntity : class, IDatabaseEntity
-        {
-            try
-            {
-                _dbContext.UpdateRange(entity);
-            }
-            catch (Exception ex)
-            {
-
+                _logger.LogError(ex, UnitOfWorkMessageHelper.ADD_RANGE_ASYNC_ERROR_MESSAGE);
             }
         }
 
@@ -88,7 +66,31 @@ namespace AutoDetail.DAL.Abstractions
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, UnitOfWorkMessageHelper.UPDATE_ERROR_MESSAGE);
+            }
+        }
 
+        public void UpdateRange<TEntity>(IEnumerable<TEntity> entity) where TEntity : class, IDatabaseEntity
+        {
+            try
+            {
+                _dbContext.UpdateRange(entity);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, UnitOfWorkMessageHelper.UPDATE_RANGE_ERROR_MESSAGE);
+            }
+        }
+
+        public void Delete<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity
+        {
+            try
+            {
+                _dbContext.Remove(entity);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, UnitOfWorkMessageHelper.DELETE_ERROR_MESSAGE);
             }
         }
 
@@ -100,8 +102,13 @@ namespace AutoDetail.DAL.Abstractions
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, UnitOfWorkMessageHelper.DELETE_RANGE_ERROR_MESSAGE);
             }
+        }
+
+        private IGenericRepository<T> GetGenericRepository<T>() where T : class, IDatabaseEntity
+        {
+            return new GenericRepository<T>(_dbContext);
         }
     }
 }
