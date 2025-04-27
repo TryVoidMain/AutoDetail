@@ -4,3 +4,7 @@ GET {{AutoDetail.Host_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{AutoDetail.Host_HostAddress}}/api/basecrudcontroller<tdto, tentity>
+
+###

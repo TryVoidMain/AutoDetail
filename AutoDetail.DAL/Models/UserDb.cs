@@ -1,4 +1,4 @@
-﻿using AutoDetail.DAL.Interfaces;
+﻿using AutoDetail.Core.Interfaces;
 
 namespace AutoDetail.DAL.Models
 {

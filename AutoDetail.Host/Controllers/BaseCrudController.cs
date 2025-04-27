@@ -1,4 +1,6 @@
-﻿using AutoDetail.DAL.Interfaces;
+﻿using AutoDetail.Core.Interfaces;
+using AutoDetail.Dtos.Queries;
+using MediatorLight.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AutoDetail.Host.Controllers
@@ -9,6 +11,14 @@ namespace AutoDetail.Host.Controllers
         where TDto : class
         where TEntity : class, IDatabaseEntity
     {
+
+        private readonly IMediator _mediator;
+
+        public BaseCrudController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [HttpGet()]
         public IActionResult GetAll()
         {
@@ -16,9 +26,12 @@ namespace AutoDetail.Host.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get([FromQuery] Guid id)
+        public async Task<IActionResult> Get([FromQuery] Guid id)
         {
-            return Ok();
+            var request = new GetEntityByIdQuery<TEntity>(id);
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
         }
 
         [HttpPost()]

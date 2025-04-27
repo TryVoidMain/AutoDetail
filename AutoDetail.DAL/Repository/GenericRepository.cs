@@ -1,4 +1,5 @@
-﻿using AutoDetail.DAL.DatabaseContext;
+﻿using AutoDetail.Core.Interfaces;
+using AutoDetail.DAL.DatabaseContext;
 using AutoDetail.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

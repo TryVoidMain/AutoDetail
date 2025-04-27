@@ -7,15 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatorLight" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Handlers\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AutoDetail.Core\AutoDetail.Core.csproj" />
+    <ProjectReference Include="..\AutoDetail.DAL\AutoDetail.DAL.csproj" />
+    <ProjectReference Include="..\AutoDetail.Dtos\AutoDetail.Dtos.csproj" />
   </ItemGroup>
 
 </Project>

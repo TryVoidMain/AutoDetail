@@ -1,4 +1,6 @@
-﻿namespace AutoDetail.DAL.Interfaces
+﻿using AutoDetail.Core.Interfaces;
+
+namespace AutoDetail.DAL.Interfaces
 {
     public interface IUnitOfWork
     {

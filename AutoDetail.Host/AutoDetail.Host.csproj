@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatorLight" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="9.0.4" />
@@ -16,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutoDetail.BLL\AutoDetail.BLL.csproj" />
     <ProjectReference Include="..\AutoDetail.Core\AutoDetail.Core.csproj" />
+    <ProjectReference Include="..\AutoDetail.CQRS\AutoDetail.CQRS.csproj" />
     <ProjectReference Include="..\AutoDetail.DAL\AutoDetail.DAL.csproj" />
     <ProjectReference Include="..\AutoDetail.Dtos\AutoDetail.Dtos.csproj" />
   </ItemGroup>

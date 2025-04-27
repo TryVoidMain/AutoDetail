@@ -1,4 +1,4 @@
-﻿namespace AutoDetail.DAL.Interfaces
+﻿namespace AutoDetail.Core.Interfaces
 {
     public interface IDatabaseEntity
     {

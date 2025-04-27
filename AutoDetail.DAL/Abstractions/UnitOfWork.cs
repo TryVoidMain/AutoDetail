@@ -1,4 +1,5 @@
-﻿using AutoDetail.DAL.DatabaseContext;
+﻿using AutoDetail.Core.Interfaces;
+using AutoDetail.DAL.DatabaseContext;
 using AutoDetail.DAL.Helpers.Messages;
 using AutoDetail.DAL.Interfaces;
 using AutoDetail.DAL.Repository;

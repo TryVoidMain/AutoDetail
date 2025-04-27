@@ -1,4 +1,6 @@
+using AutoDetail.CQRS;
 using AutoDetail.DAL.DatabaseContext;
+using MediatorLight.Registration;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -29,7 +31,8 @@ namespace AutoDetail.Host
                 options.UseNpgsql(configuration.GetConnectionString("AutoDetailDb"));
             });
 
-            builder.Services.AddControllers();
+            services.AddMediatorLight(CQRSAssemblyInfo.Value);
+            services.AddControllers();
 
             var app = builder.Build();
 
