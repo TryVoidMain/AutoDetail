@@ -13,7 +13,7 @@ namespace AutoDetail.DAL.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public bool IsVerified { get; set; }
-        public Guid? AddressId { get; set; }
         public string PaymentDetail { get; set; }
+        public AddressDb? Address { get; set; }
     }
 }
