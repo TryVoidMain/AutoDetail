@@ -1,5 +1,7 @@
 using AutoDetail.CQRS;
+using AutoDetail.DAL.Abstractions;
 using AutoDetail.DAL.DatabaseContext;
+using AutoDetail.DAL.Interfaces;
 using MediatorLight.Registration;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -31,6 +33,7 @@ namespace AutoDetail.Host
                 options.UseNpgsql(configuration.GetConnectionString("AutoDetailDb"));
             });
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMediatorLight(CQRSAssemblyInfo.Value);
             services.AddControllers();
 

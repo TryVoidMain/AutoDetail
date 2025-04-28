@@ -1,8 +1,8 @@
-﻿using AutoDetail.Core.Interfaces;
+﻿using AutoDetail.DAL.Models;
 
-namespace AutoDetail.DAL.Models
+namespace AutoDetail.Dtos.Dtos
 {
-    public class AddressDb : IDatabaseEntity
+    public class AddressDto
     {
         public Guid Id { get; set; }
         public DateTime? CreatedAt { get; set; }

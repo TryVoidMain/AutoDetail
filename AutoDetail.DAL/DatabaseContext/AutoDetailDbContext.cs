@@ -1,5 +1,6 @@
 ﻿using AutoDetail.DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AutoDetail.DAL.DatabaseContext
 {
@@ -21,6 +22,8 @@ namespace AutoDetail.DAL.DatabaseContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            ConvertValues(modelBuilder);
+
             modelBuilder.Entity<UserDb>(entity =>
             {
                 entity.ToTable(nameof(Users));
@@ -38,6 +41,26 @@ namespace AutoDetail.DAL.DatabaseContext
                     .WithOne(e => e.User)
                     .HasForeignKey<AddressDb>(x => x.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasData(new List<UserDb>
+                {
+                    new()
+                    {
+                        Id = Guid.NewGuid(),
+                        FirstName = "Konstantin",
+                        LastName = "Shcherbinin",
+                        IsAdmin = true,
+                        CreatedAt = DateTime.Now
+                    },
+                    new()
+                    {
+                        Id = Guid.NewGuid(),
+                        FirstName = "Alexander",
+                        LastName = "Palatov",
+                        IsAdmin = true,
+                        CreatedAt = DateTime.Now
+                    },
+                });
             });
 
             modelBuilder.Entity<AddressDb>(entity =>
@@ -57,6 +80,27 @@ namespace AutoDetail.DAL.DatabaseContext
                 entity.Property(p => p.Appartments)
                     .HasMaxLength(10);
             });
+        }
+
+        private void ConvertValues(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(DateTime) || property.ClrType == typeof(DateTime?))
+                    {
+                        property.SetValueConverter(
+                            new ValueConverter<DateTime, DateTime>(
+                                v => v.Kind == DateTimeKind.Unspecified ?
+                                    DateTime.SpecifyKind(v, DateTimeKind.Local).ToUniversalTime() :
+                                    v.ToUniversalTime(),
+                                v => DateTime.SpecifyKind(v, DateTimeKind.Utc).ToLocalTime()
+                            )
+                        );
+                    }
+                }
+            }
         }
     }
 }

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoDetail.Core\AutoDetail.Core.csproj" />
+    <ProjectReference Include="..\AutoDetail.DAL\AutoDetail.DAL.csproj" />
   </ItemGroup>
 
 </Project>

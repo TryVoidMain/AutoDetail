@@ -107,7 +107,7 @@ namespace AutoDetail.DAL.Abstractions
             }
         }
 
-        private IGenericRepository<T> GetGenericRepository<T>() where T : class, IDatabaseEntity
+        public IGenericRepository<T> GetGenericRepository<T>() where T : class, IDatabaseEntity
         {
             return new GenericRepository<T>(_dbContext);
         }

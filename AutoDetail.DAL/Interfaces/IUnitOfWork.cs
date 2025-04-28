@@ -11,5 +11,6 @@ namespace AutoDetail.DAL.Interfaces
         void Delete<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity;
         void DeleteRange<TEntity>(IEnumerable<TEntity> entity) where TEntity : class, IDatabaseEntity;
         Task SaveAsync();
+        IGenericRepository<T> GetGenericRepository<T>() where T : class, IDatabaseEntity;
     }
 }

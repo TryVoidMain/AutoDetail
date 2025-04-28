@@ -7,6 +7,7 @@ namespace AutoDetail.Host.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class BaseCrudController<TDto, TEntity> : ControllerBase
         where TDto : class
         where TEntity : class, IDatabaseEntity
@@ -19,14 +20,14 @@ namespace AutoDetail.Host.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet()]
-        public IActionResult GetAll()
+        [HttpGet]
+        public virtual async Task<IActionResult> GetAll()
         {
             return Ok();
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromQuery] Guid id)
+        public virtual async Task<IActionResult> Get([FromQuery] Guid id)
         {
             var request = new GetEntityByIdQuery<TEntity>(id);
             var result = await _mediator.Send(request);
@@ -35,25 +36,25 @@ namespace AutoDetail.Host.Controllers
         }
 
         [HttpPost()]
-        public IActionResult Post([FromBody] TDto entity)
+        public virtual IActionResult Post([FromBody] TDto entity)
         {
             return Ok();
         }
 
         [HttpPut()]
-        public IActionResult Put([FromBody] TDto entity)
+        public virtual IActionResult Put([FromBody] TDto entity)
         {
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromQuery] Guid id)
+        public virtual IActionResult DeleteById([FromQuery] Guid id)
         {
             return Ok();
         }
 
         [HttpDelete()]
-        public IActionResult DeleteRange([FromQuery] List<Guid> ids)
+        public virtual IActionResult DeleteRange([FromQuery] List<Guid> ids)
         {
             return Ok();
         }
