@@ -36,7 +36,6 @@ namespace AutoDetail.Host
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMediatorLight(CQRSAssemblyInfo.Value);
             services.AddControllers();
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
