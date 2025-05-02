@@ -1,11 +1,16 @@
 ﻿using AutoDetail.Core.Interfaces;
+using System.Linq.Expressions;
 
 namespace AutoDetail.DAL.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : class, IDatabaseEntity
     {
         Task<TEntity> GetByIdAsync(Guid id);
-        Task<IEnumerable<TEntity>> GetAll();
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate);
+        Task<List<TEntity>> GetWhereToListAsync(Expression<Func<TEntity, bool>> predicate);
+
+
         Task AddAsync(TEntity entity);
         Task AddRangeAsync(IEnumerable<TEntity> entities);
         void Update(TEntity entity);

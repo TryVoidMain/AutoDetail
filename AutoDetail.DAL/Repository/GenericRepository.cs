@@ -2,6 +2,7 @@
 using AutoDetail.DAL.DatabaseContext;
 using AutoDetail.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace AutoDetail.DAL.Repository
 {
@@ -23,9 +24,9 @@ namespace AutoDetail.DAL.Repository
             return await Entities.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await Entities.ToListAsync();
+            return await GetAllQueryCommon().ToListAsync();
         }
 
         public async Task AddAsync(TEntity entity)
@@ -56,6 +57,26 @@ namespace AutoDetail.DAL.Repository
         public void DeleteRange(IEnumerable<TEntity> entities)
         {
             Entities.RemoveRange(entities);
+        }
+
+        public IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate)
+        {
+            return GetWhereCommon(predicate);
+        }
+
+        public async Task<List<TEntity>> GetWhereToListAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await GetWhereCommon(predicate).ToListAsync();
+        }
+
+        private IQueryable<TEntity> GetAllQueryCommon()
+        {
+            return Entities.AsNoTracking().AsQueryable();
+        }
+
+        private IQueryable<TEntity> GetWhereCommon(Expression<Func<TEntity, bool>> predicate)
+        {
+            return Entities.AsNoTracking().Where(predicate).AsQueryable();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoDetail.Core.Interfaces;
 using AutoDetail.DAL.Interfaces;
-using AutoDetail.Dtos.Queries;
+using AutoDetail.Dtos.Queries.Common;
 using MediatorLight.Interfaces;
 
 namespace AutoDetail.CQRS.Handlers.Queries

@@ -5,20 +5,21 @@ using MediatorLight.Interfaces;
 
 namespace AutoDetail.CQRS.Handlers.Queries
 {
-    public class GetQueryHandler<T> : IRequestHandler<GetQuery<T>, IEnumerable<T>> where T : class, IDatabaseEntity
+    public class GetEntitiesByIdsQueryHandler<T> : IRequestHandler<GetEntitiesByIdsQuery<T>, IEnumerable<T>> where T : class, IDatabaseEntity
     {
         private readonly IUnitOfWork _unitOfWork;
-        public GetQueryHandler(IUnitOfWork unitOfWork)
+        public GetEntitiesByIdsQueryHandler(IUnitOfWork unitOfWork)
         {
             ArgumentNullException.ThrowIfNull(unitOfWork);
 
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<T>> Handle(GetQuery<T> request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<T>> Handle(GetEntitiesByIdsQuery<T> request, CancellationToken cancellationToken)
         {
+            var ids = request.Ids;
             var repository = _unitOfWork.GetGenericRepository<T>();
-            return await repository.GetAllAsync();
+            return await repository.GetWhereToListAsync(x => ids.Contains(x.Id));
         }
     }
 }

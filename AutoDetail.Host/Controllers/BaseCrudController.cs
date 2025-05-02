@@ -1,5 +1,5 @@
 ﻿using AutoDetail.Core.Interfaces;
-using AutoDetail.Dtos.Queries;
+using AutoDetail.Dtos.Queries.Common;
 using MediatorLight.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +34,20 @@ namespace AutoDetail.Host.Controllers
         public virtual async Task<IActionResult> Get(Guid id)
         {
             var request = new GetEntityByIdQuery<TEntity>(id);
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
+        }
+
+        [HttpGet("GetByIds")]
+        public virtual async Task<IActionResult> GetByIds([FromQuery] List<Guid> ids)
+        {
+            if (ids is not List<Guid> listIds)
+            {
+                return BadRequest();
+            }
+
+            var request = new GetEntitiesByIdsQuery<TEntity>(ids);
             var result = await _mediator.Send(request);
 
             return Ok(result);
