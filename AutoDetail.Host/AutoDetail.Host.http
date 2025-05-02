@@ -3,3 +3,7 @@
 
 
 GET {{AutoDetail.Host_HostAddress}}/api/users/
+
+###
+
+GET {{AutoDetail.Host_HostAddress}}/api/users/7bf3272e-e8e2-431e-bade-20f1675d5617

@@ -13,21 +13,25 @@ namespace AutoDetail.Host.Controllers
         where TEntity : class, IDatabaseEntity
     {
 
-        private readonly IMediator _mediator;
+        protected readonly IMediator _mediator;
 
         public BaseCrudController(IMediator mediator)
         {
+            ArgumentNullException.ThrowIfNull(mediator);
+
             _mediator = mediator;
         }
 
         [HttpGet]
         public virtual async Task<IActionResult> GetAll()
         {
-            return Ok();
+            var request = new GetQuery<TEntity>();
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<IActionResult> Get([FromQuery] Guid id)
+        public virtual async Task<IActionResult> Get(Guid id)
         {
             var request = new GetEntityByIdQuery<TEntity>(id);
             var result = await _mediator.Send(request);
