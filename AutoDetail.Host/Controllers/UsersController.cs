@@ -2,7 +2,6 @@
 using AutoDetail.DAL.Models;
 using AutoDetail.Dtos.Dtos;
 using MediatorLight.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AutoDetail.Host.Controllers
 {
@@ -17,13 +16,6 @@ namespace AutoDetail.Host.Controllers
 
             _unitOfWork = unitOfWork;
             _usersRepository = unitOfWork.GetGenericRepository<UserDb>();
-        }
-
-        [HttpGet]
-        public override async Task<IActionResult> GetAll()
-        {
-            var result = await _usersRepository.GetAll();
-            return Ok(result);
         }
     }
 }
