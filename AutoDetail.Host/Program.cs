@@ -67,6 +67,10 @@ namespace AutoDetail.Host
             cb.RegisterGeneric(typeof(GetQueryHandler<>))
                 .As(typeof(IRequestHandler<,>))
                 .InstancePerLifetimeScope();
+
+            cb.RegisterGeneric(typeof(GetEntitiesByIdsQueryHandler<>))
+                .As(typeof(IRequestHandler<,>))
+                .InstancePerLifetimeScope();
         }
     }
 }
