@@ -1,4 +1,5 @@
 using AutoDetail.CQRS;
+using AutoDetail.CQRS.Handlers.Commands;
 using AutoDetail.CQRS.Handlers.Queries;
 using AutoDetail.DAL;
 using AutoDetail.DAL.Abstractions;
@@ -6,6 +7,7 @@ using AutoDetail.DAL.DatabaseContext;
 using AutoDetail.DAL.Interfaces;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using MapsterMapper;
 using MediatorLight.Implementation;
 using MediatorLight.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +43,7 @@ namespace AutoDetail.Host
                 options.UseNpgsql(configuration.GetConnectionString("AutoDetailDb"));
             });
 
+            services.AddScoped<IMapper, Mapper>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
             var app = builder.Build();
@@ -69,6 +72,18 @@ namespace AutoDetail.Host
                 .InstancePerLifetimeScope();
 
             cb.RegisterGeneric(typeof(GetEntitiesByIdsQueryHandler<>))
+                .As(typeof(IRequestHandler<,>))
+                .InstancePerLifetimeScope();
+
+            cb.RegisterGeneric(typeof(DeleteEntityByIdCommandHandler<>))
+                .As(typeof(IRequestHandler<,>))
+                .InstancePerLifetimeScope();
+
+            cb.RegisterGeneric(typeof(DeleteEntitiesByIdsCommandHandler<>))
+                .As(typeof(IRequestHandler<,>))
+                .InstancePerLifetimeScope();
+
+            cb.RegisterGeneric(typeof(AddEntityCommandHandler<>))
                 .As(typeof(IRequestHandler<,>))
                 .InstancePerLifetimeScope();
         }

@@ -11,3 +11,11 @@ GET {{AutoDetail.Host_HostAddress}}/api/users/7bf3272e-e8e2-431e-bade-20f1675d56
 ###
 
 GET {{AutoDetail.Host_HostAddress}}/api/users/GetByIds?ids=7bf3272e-e8e2-431e-bade-20f1675d5617&ids=a8f6a548-f091-4625-8921-672d580d55cc
+
+###
+POST {{AutoDetail.Host_HostAddress}}/api/users
+content-type: application/json
+{
+  "firstName": "TestName",
+  "lastName": "TestLastName"
+}
