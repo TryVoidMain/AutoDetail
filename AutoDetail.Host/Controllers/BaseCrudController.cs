@@ -71,9 +71,12 @@ namespace AutoDetail.Host.Controllers
         }
 
         [HttpPut()]
-        public virtual IActionResult Put([FromBody] TDto entity)
+        public virtual async Task<IActionResult> Put([FromBody] TDto entity)
         {
-            return Ok();
+            var request = new UpdateEntityCommand<TEntity>(_mapper.Map<TDto, TEntity>(entity));
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]

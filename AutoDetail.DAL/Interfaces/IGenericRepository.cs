@@ -9,7 +9,7 @@ namespace AutoDetail.DAL.Interfaces
         Task<IEnumerable<TEntity>> GetAllAsync();
         IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate);
         Task<List<TEntity>> GetWhereToListAsync(Expression<Func<TEntity, bool>> predicate);
-
+        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 
         Task AddAsync(TEntity entity);
         Task AddRangeAsync(IEnumerable<TEntity> entities);

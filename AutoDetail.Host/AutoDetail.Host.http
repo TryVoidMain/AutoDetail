@@ -19,3 +19,20 @@ content-type: application/json
   "firstName": "TestName",
   "lastName": "TestLastName"
 }
+
+###
+PUT {{AutoDetail.Host_HostAddress}}/api/users/
+content-type: application/json
+  {
+    "id": "dbd7a6bd-4c63-4367-8e10-6fa1844a8865",
+    "firstName": "TestNameUpdated",
+    "lastName": "TestLastName",
+    "passwordHash": null,
+    "email": null,
+    "phone": "+79999999999",
+    "updatedAt": null,
+    "isVerified": false,
+    "isAdmin": false,
+    "paymentDetail": null,
+    "address": null
+  }

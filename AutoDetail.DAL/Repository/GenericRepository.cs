@@ -69,6 +69,11 @@ namespace AutoDetail.DAL.Repository
             return await GetWhereCommon(predicate).ToListAsync();
         }
 
+        public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await Entities.FirstOrDefaultAsync(predicate);
+        }
+
         private IQueryable<TEntity> GetAllQueryCommon()
         {
             return Entities.AsNoTracking().AsQueryable();
